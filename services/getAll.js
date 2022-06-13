@@ -1,10 +1,10 @@
-const fs = require('./fs');
+const models = require('../models');
 
 const getAll = async () => {
-    const users = fs.getAll();
+    const users = models.getAll();
 
     if (users.length === 0) throw new Error('No users found');
-    
+
     return users;
 };
 
