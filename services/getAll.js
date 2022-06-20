@@ -1,11 +1,11 @@
-const models = require('../models');
+// const models = require('../models');
+const fs = require('fs').promises;
 
 const getAll = async () => {
-    const users = models.getAll();
+    const data = await fs.readFile('talker.json', 'utf8');
+    const talkers = JSON.parse(data);
 
-    if (users.length === 0) throw new Error('No users found');
-
-    return users;
+    return talkers;
 };
 
 module.exports = getAll;
