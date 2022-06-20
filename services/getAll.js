@@ -1,4 +1,3 @@
-// const models = require('../models');
 const fs = require('fs').promises;
 
 const getAll = async () => {
