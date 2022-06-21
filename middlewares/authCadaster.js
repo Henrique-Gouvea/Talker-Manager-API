@@ -1,7 +1,14 @@
 const schema = require('../schemas');
 
-const authLogin = (req, res, next) => {
+const authCadaster = (req, res, next) => {
     const { name, age, talk: { watchedAt, rate } } = req.body;
+
+    const token = req.headers.authorization;
+    const tokenMessage = schema.tokenSchema.validate({ token });
+
+    if (tokenMessage.error) {
+        return res.status(401).json({ message: tokenMessage.error.message });
+    }
 
     const { error } = schema
     .cadasterSchema.validate({ name, age, talk: { watchedAt, rate } });
@@ -13,4 +20,4 @@ const authLogin = (req, res, next) => {
     return next();
 };
 
-module.exports = authLogin;
+module.exports = authCadaster;
