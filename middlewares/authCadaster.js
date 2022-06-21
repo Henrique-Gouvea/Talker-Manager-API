@@ -1,7 +1,7 @@
 const schema = require('../schemas');
 
 const authCadaster = (req, res, next) => {
-    const { name, age, talk: { watchedAt, rate } } = req.body;
+    const { name, age, talk } = req.body;
 
     const token = req.headers.authorization;
     const tokenMessage = schema.tokenSchema.validate({ token });
@@ -11,7 +11,7 @@ const authCadaster = (req, res, next) => {
     }
 
     const { error } = schema
-    .cadasterSchema.validate({ name, age, talk: { watchedAt, rate } });
+    .cadasterSchema.validate({ name, age, talk });
 
     if (error) {
         return res.status(400).json({ message: error.message });
