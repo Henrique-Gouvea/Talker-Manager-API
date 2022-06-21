@@ -15,15 +15,15 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-app.use((req, _res, next) => {
-  console.log('req.method:', req.method);
-  console.log('req.path:', req.path);
-  console.log('req.params:', req.params);
-  console.log('req.query:', req.query);
-  console.log('req.headers:', req.headers);
-  console.log('req.body:', req.body);
-  next();
-});
+// app.use((req, _res, next) => {
+//   console.log('req.method:', req.method);
+//   console.log('req.path:', req.path);
+//   console.log('req.params:', req.params);
+//   console.log('req.query:', req.query);
+//   console.log('req.headers:', req.headers);
+//   console.log('req.body:', req.body);
+//   next();
+// });
 
 app.get('/talker', controllers.getAll);
 
