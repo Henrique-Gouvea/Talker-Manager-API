@@ -1,9 +1,10 @@
 const schema = require('../schemas');
 
 const authLogin = (req, res, next) => {
-    const { email, password } = req.body;
+    const { name, age, talk: { watchedAt, rate } } = req.body;
 
-    const { error } = schema.userSchema.validate({ email, password });
+    const { error } = schema
+    .cadasterSchema.validate({ name, age, talk: { watchedAt, rate } });
 
     if (error) {
         return res.status(400).json({ message: error.message });

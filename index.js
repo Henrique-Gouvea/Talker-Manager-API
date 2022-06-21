@@ -20,7 +20,7 @@ app.get('/talker/:id', controllers.getById);
 
 app.post('/login', middlewares.authLogin, controllers.getToken);
 
-app.post('/talker', controllers.createTalker);
+app.post('/talker', middlewares.authCadaster, controllers.createTalker);
 
 app.listen(PORT, () => {
   console.log('Online');
