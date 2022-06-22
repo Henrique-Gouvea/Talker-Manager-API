@@ -37,6 +37,8 @@ app.post('/talker', middlewares.authCadaster, controllers.createTalker);
 
 app.put('/talker/:id', middlewares.authCadaster, controllers.updateTalker);
 
+app.delete('/talker/:id', middlewares.authToken, controllers.deleteTalker);
+
 app.listen(PORT, () => {
   console.log('Online');
 });
