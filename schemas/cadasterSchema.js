@@ -36,7 +36,9 @@ const cadasterSchema = Joi.object({
         .number()
         .required()
         .min(1)
+        .required()
         .max(5)
+        .required()
         .message({
             'number.empty': 'O campo "rate" é obrigatório',
             'number.min': 'O campo "rate" deve ser um inteiro de 1 à 5',
@@ -48,6 +50,7 @@ const cadasterSchema = Joi.object({
     .messages({
         'object.empty': 'O campo "talk" é obrigatório',
         'any.required': 'O campo "talk" é obrigatório',
+        // 'object.rate': 'O campo "rate" é obrigatório',
     }),
 });
 
