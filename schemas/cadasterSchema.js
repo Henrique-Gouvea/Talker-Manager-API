@@ -1,5 +1,4 @@
-const Joi = require('joi');
-// const JoiDate = require('@joi/date');
+const Joi = require('joi').extend(require('@joi/date'));
 
 const cadasterSchema = Joi.object({
     name: Joi
@@ -23,22 +22,18 @@ const cadasterSchema = Joi.object({
     }),
     talk: Joi.object({
         watchedAt: Joi
-        // .date().format('DD/MM/YYYY')
-        .string()
-        .regex(/^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4}$/)
+        .date()
+        .format('DD/MM/YYYY')
         .required()
         .messages({
-            'string.empty': 'O campo "watchedAt" é obrigatório',
-            'string.pattern.base': 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"',
             'any.required': 'O campo "watchedAt" é obrigatório',
+            'date.format': 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"',
         }),
         rate: Joi
         .number()
         .required()
         .min(1)
-        .required()
         .max(5)
-        .required()
         .message({
             'number.empty': 'O campo "rate" é obrigatório',
             'number.min': 'O campo "rate" deve ser um inteiro de 1 à 5',
@@ -52,6 +47,6 @@ const cadasterSchema = Joi.object({
         'any.required': 'O campo "talk" é obrigatório',
         // 'object.rate': 'O campo "rate" é obrigatório',
     }),
-});
+}).required();
 
 module.exports = cadasterSchema;

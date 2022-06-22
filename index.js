@@ -24,6 +24,7 @@ app.get('/', (_request, response) => {
 //   console.log('req.body:', req.body);
 //   next();
 // });
+app.get('/talker/search', middlewares.authToken, controllers.searchTalker);
 
 app.get('/talker', controllers.getAll);
 
