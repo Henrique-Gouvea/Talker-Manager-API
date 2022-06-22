@@ -6,9 +6,8 @@ const updateTalker = async (req, res) => {
         const { id } = req.params;
         const { name, age, talk } = req.body;
         const data = await services.updateTalker(name, age, talk, Number(id));
-        console.log(data);
         writeFile(data.talkersUpdated);
-        return res.status(202).json(data.updateTalk);
+        return res.status(200).json(data.updateTalk);
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
