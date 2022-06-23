@@ -1,44 +1,34 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const req = require('express/lib/request');
-const controllers = require('./controllers');
-const middlewares = require('./middlewares');
 
 const app = express();
 app.use(bodyParser.json());
 
+const { loginRouter, talkersRouter } = require('./routes');
+
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
-// não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-// app.use((req, _res, next) => {
-//   console.log('req.method:', req.method);
-//   console.log('req.path:', req.path);
-//   console.log('req.params:', req.params);
-//   console.log('req.query:', req.query);
-//   console.log('req.headers:', req.headers);
-//   console.log('req.body:', req.body);
-//   next();
-// });
-app.get('/talker/search', middlewares.authToken, controllers.searchTalker);
+app.use('/talker', talkersRouter);
+app.use('/login', loginRouter);
 
-app.get('/talker', controllers.getAll);
+// app.get('/talker/search', middlewares.authToken, controllers.searchTalker);
 
-app.get('/talker/:id', controllers.getById);
+// app.get('/talker', controllers.getAll);
 
-app.post('/login', middlewares.authLogin, controllers.getToken);
+// app.get('/talker/:id', controllers.getById);
 
-// app.post('/talker', (req, _res) => console.log(req.body), controllers.createTalker);
+// app.post('/login', middlewares.authLogin, controllers.getToken);
 
-app.post('/talker', middlewares.authCadaster, controllers.createTalker);
+// app.post('/talker', middlewares.authCadaster, controllers.createTalker);
 
-app.put('/talker/:id', middlewares.authCadaster, controllers.updateTalker);
+// app.put('/talker/:id', middlewares.authCadaster, controllers.updateTalker);
 
-app.delete('/talker/:id', middlewares.authToken, controllers.deleteTalker);
+// app.delete('/talker/:id', middlewares.authToken, controllers.deleteTalker);
 
 app.listen(PORT, () => {
   console.log('Online');
